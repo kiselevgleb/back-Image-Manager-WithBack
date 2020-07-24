@@ -96,10 +96,11 @@ app.use(async (ctx) => {
       return;
     case 'create':
       console.log("create");
-      console.log(ctx.request.files.file);
+      console.log(ctx.request.files.file.size);
+      if(ctx.request.files.file.size>0){
       const reader = fs.createReadStream(ctx.request.files.file.path);
       const stream = fs.createWriteStream(path.join(public, Math.random() + ".png"));
-      reader.pipe(stream);
+      reader.pipe(stream);}
       return;
   }
 });
