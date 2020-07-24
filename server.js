@@ -60,7 +60,7 @@ app.use(async (ctx) => {
         console.log(files);
         f = [];
         files.forEach(file => {
-          let path = public + "\\" + file;
+          let path = public + "//" + file;
           let size = fs.statSync(path)["size"];
           if (size > 0) {
             console.log("2");
