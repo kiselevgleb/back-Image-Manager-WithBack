@@ -64,7 +64,7 @@ app.use(async (ctx) => {
           let size = fs.statSync(path)["size"];
           if (size > 0) {
             console.log("2");
-            f.push({path: "kiselevgleb.github.io//back-Image-Manager-WithBack//public//" + file, size: `${size}`});
+            f.push({path: "https:////kiselevgleb.github.io//back-Image-Manager-WithBack//public//" + file, size: `${size}`});
           }
         });
       });
