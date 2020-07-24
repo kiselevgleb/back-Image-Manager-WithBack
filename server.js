@@ -77,7 +77,7 @@ app.use(async (ctx) => {
       console.log(public);
       fs.readdir(public, (err, files) => {
         files.forEach(file => {
-          let path = public + "\\" + file;
+          let path = public + "//" + file;
           console.log(path);
           // console.log(fs.statSync(path)["size"]);
           if (fs.statSync(path)["size"].toString() === js.num) {
