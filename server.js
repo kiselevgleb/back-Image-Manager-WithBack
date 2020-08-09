@@ -3,7 +3,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const path = require('path');
 const fs = require('fs');
-const public = path.join(__dirname, '/public')
+const public = path.join(__dirname, './public')
 const app = new Koa();
 const uuid = require('uuid');
 
