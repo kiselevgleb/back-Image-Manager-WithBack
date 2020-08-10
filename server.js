@@ -51,7 +51,14 @@ const Router = require('koa-router');
 const router = new Router();
 router.get('/pub', async (ctx) => {
 console.log(ctx);
- ctx.body = "servers";
+        fs.readdir(public, (err, files) => {
+        console.log(files);
+ctx.body = files[0];
+      });
+  
+  
+  
+ 
 });
 router.get('/all', async (ctx) => {
    console.log("All");
