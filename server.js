@@ -48,7 +48,7 @@ app.use(koaBody({
 let f = [];
 const Router = require('koa-router');
 const router = new Router();
-router.get('/public', async (ctx) => {
+router.get('/pub', async (ctx) => {
 console.log(ctx);
  ctx.body = "servers";
 });
