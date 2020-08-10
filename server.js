@@ -46,6 +46,12 @@ app.use(koaBody({
   multipart: true,
 }));
 let f = [];
+
+const router = new Router();
+router.get('/public', async (ctx) => {
+console.log(ctx);
+});
+
 app.use(async (ctx) => {
   const {
     method,
