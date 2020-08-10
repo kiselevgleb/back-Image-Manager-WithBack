@@ -53,7 +53,7 @@ router.get('/pub', async (ctx) => {
 console.log(ctx);
         fs.readdir(public, (err, files) => {
         console.log(files);
-ctx.body = files[0];
+ctx.body = files[0].size;
       });
   
   
