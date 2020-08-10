@@ -50,6 +50,7 @@ const Router = require('koa-router');
 const router = new Router();
 router.get('/public', async (ctx) => {
 console.log(ctx);
+  ctx.respond = ctx;
 });
 
 app.use(async (ctx) => {
