@@ -47,16 +47,14 @@ app.use(koaBody({
 }));
 let f = [];
 
-app.use(async (ctx) => {
-  const {
-    method,
-  } = ctx.request.query;
-  ctx.response.set({
-    'Access-Control-Allow-Origin': '*',
-  });
-  switch (method) {
-    case 'all':
-      console.log("All");
+const Router = require('koa-router');
+const router = new Router();
+router.get('/pub', async (ctx) => {
+console.log(ctx);
+ ctx.body = "servers";
+});
+router.get('/all', async (ctx) => {
+   console.log("All");
       fs.readdir(public, (err, files) => {
         console.log(files);
         f = [];
@@ -69,11 +67,12 @@ app.use(async (ctx) => {
           }
         });
       });
-      ctx.response.body = f;
-      return;
+      ctx.body = f;
+});
 
-    case 'delById':
-      const js = JSON.parse(ctx.request.body);
+
+router.get('/delById', async (ctx) => {
+const js = JSON.parse(ctx.body);
       console.log(js.num);
       console.log(public);
       fs.readdir(public, (err, files) => {
@@ -93,26 +92,19 @@ app.use(async (ctx) => {
           }
         });
       });
+  ctx.body = true;
+});
 
-      return;
-    case 'create':
-      console.log("create");
-      console.log(ctx.request.files.file.size);
-      if(ctx.request.files.file.size>0){
-      const reader = fs.createReadStream(ctx.request.files.file.path);
+router.get('/create', async (ctx) => {
+console.log("create");
+      console.log(ctx.files.file.size);
+      if(ctx.files.file.size>0){
+      const reader = fs.createReadStream(ctx.files.file.path);
       const stream = fs.createWriteStream(path.join(public, Math.random() + ".png"));
       reader.pipe(stream);}
-      return;
-  }
+      
+ ctx.body = true;
 });
-
-const Router = require('koa-router');
-const router = new Router();
-router.get('/pub', async (ctx) => {
-console.log(ctx);
- ctx.body = "servers";
-});
-
 
 app.use(router.routes()).use(router.allowedMethods());
 const port = process.env.PORT || 7070;
