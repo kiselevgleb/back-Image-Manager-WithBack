@@ -71,7 +71,7 @@ app.use(async (ctx) => {
           let size = fs.statSync(path)["size"];
           if (size > 0) {
             console.log("2");
-            f.push({path: "https:////kiselevgleb.github.io//back-Image-Manager-WithBack//public//" + file, size: `${size}`});
+            f.push({path: "https://back-image-manager.herokuapp.com/public/" + file, size: `${size}`});
           }
         });
       });
@@ -111,5 +111,6 @@ app.use(async (ctx) => {
       return;
   }
 });
+app.use(router.routes()).use(router.allowedMethods());
 const port = process.env.PORT || 7070;
 const server = http.createServer(app.callback()).listen(port);
