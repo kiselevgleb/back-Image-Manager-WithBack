@@ -66,17 +66,16 @@ app.use(async (ctx) => {
         console.log(files);
         f = [];
         files.forEach(file => {
-          let path = public + "//" + file;
-          let size = fs.statSync(path)["size"];
-          if (size > 0) {
-            console.log("2");
+//           let path = public + "//" + file;
+//           let size = fs.statSync(path)["size"];
+//           if (size > 0) {
+//             console.log("2");
             f.push({path: "https://back-image-manager.herokuapp.com/" + file, size: `${size}`});
-          }
+//           }
+           
         });
       });
-      setTimeout(() => {
-  
-}, 1500);
+      console.log(f);
       ctx.response.body = f;
       return;
 
