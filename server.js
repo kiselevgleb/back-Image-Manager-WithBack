@@ -40,6 +40,8 @@ app.use(async (ctx, next) => {
     ctx.response.status = 204;
   }
 });
+const serve = require('koa-static');
+app.use(serve('test/fixtures'));
 
 app.use(koaBody({
   urlencoded: true,
