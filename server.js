@@ -107,7 +107,7 @@ app.use(async (ctx) => {
       console.log(ctx.request.files.file.size);
       if(ctx.request.files.file.size>0){
       const reader = fs.createReadStream(ctx.request.files.file.path);
-      const stream = fs.createWriteStream(path.join(public, Math.random() + ".png"));
+      const stream = fs.createWriteStream(path.join(public, ctx.request.files.file.size + ".png"));
       reader.pipe(stream);}
       return;
   }
