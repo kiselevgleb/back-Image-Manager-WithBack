@@ -75,9 +75,9 @@ app.use(async (ctx) => {
         });
       });
       setTimeout(() => {
-  ctx.response.body = f;
+  
 }, 1500);
-      
+      ctx.response.body = f;
       return;
 
     case 'delById':
