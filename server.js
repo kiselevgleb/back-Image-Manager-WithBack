@@ -70,7 +70,7 @@ app.use(async (ctx) => {
           let size = fs.statSync(path)["size"];
           if (size > 0) {
             console.log("2");
-            f.push({path: "https://back-image-manager.herokuapp.com/public/" + file, size: `${size}`});
+            f.push({path: file, size: `${size}`});
           }
         });
       });
