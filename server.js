@@ -3,7 +3,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const path = require('path');
 const fs = require('fs');
-const public = path.join(__dirname, '/public')
+const public = path.join(__dirname, './public')
 const app = new Koa();
 const uuid = require('uuid');
 
@@ -41,11 +41,17 @@ app.use(async (ctx, next) => {
   }
 });
 
+
 app.use(koaBody({
   urlencoded: true,
   multipart: true,
 }));
+
 let f = [];
+
+const serve = require('koa-static');
+app.use(serve('public'));
+
 app.use(async (ctx) => {
   const {
     method,
@@ -60,14 +66,16 @@ app.use(async (ctx) => {
         console.log(files);
         f = [];
         files.forEach(file => {
-          let path = public + "//" + file;
-          let size = fs.statSync(path)["size"];
-          if (size > 0) {
-            console.log("2");
-            f.push({path: "https:////kiselevgleb.github.io//back-Image-Manager-WithBack//public//" + file, size: `${size}`});
-          }
+//           let path = public + "//" + file;
+//           let size = fs.statSync(path)["size"];
+//           if (size > 0) {
+//             console.log("2");
+            f.push({path: "https://back-image-manager.herokuapp.com/" + file});
+//           }
+           
         });
       });
+      console.log(f);
       ctx.response.body = f;
       return;
 
@@ -99,10 +107,11 @@ app.use(async (ctx) => {
       console.log(ctx.request.files.file.size);
       if(ctx.request.files.file.size>0){
       const reader = fs.createReadStream(ctx.request.files.file.path);
-      const stream = fs.createWriteStream(path.join(public, Math.random() + ".png"));
+      const stream = fs.createWriteStream(path.join(public, ctx.request.files.file.size + ".png"));
       reader.pipe(stream);}
       return;
   }
 });
+
 const port = process.env.PORT || 7070;
 const server = http.createServer(app.callback()).listen(port);
