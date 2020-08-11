@@ -41,7 +41,7 @@ app.use(async (ctx, next) => {
   }
 });
 const serve = require('koa-static');
-app.use(serve('test/fixtures'));
+app.use(serve('public'));
 
 app.use(koaBody({
   urlencoded: true,
